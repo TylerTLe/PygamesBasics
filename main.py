@@ -52,6 +52,11 @@ while True:
     if player_hitbox.bottom >= 300: player_hitbox.bottom = 300
     screen.blit(player_surface,player_hitbox)
 
+    # Collision
+    if snail_hitbox.colliderect(player_hitbox):
+        pygame.quit()
+        exit()
+
     pygame.display.update()
     clock.tick(60)
 
