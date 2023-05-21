@@ -2,6 +2,12 @@ import pygame
 from sys import exit
 from random import randint
 
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load('graphics/player/player_walk_1.png').convert_alpha()
+        self.rect = self.image.get_rect(midbottom = (200,300))
+
 def display_score():
     current_time = int(pygame.time.get_ticks() / 1000) - start_time
     score_surface = test_font.render(f'Score:{current_time}', False, (64,64,64))
@@ -46,6 +52,8 @@ test_font = pygame.font.Font('font/Pixeltype.ttf',50)
 game_active = False
 start_time = 0
 score = 0
+
+player = Player()
 
 sky = pygame.image.load('graphics/Sky.png').convert()
 ground = pygame.image.load('graphics/Ground.png').convert()
@@ -134,20 +142,12 @@ while True:
                 else: fly_frame_index = 0
                 fly_surf = fly_frames[fly_frame_index]
 
-        
-            
-
 # Game screen and mechanics
     if game_active:
         # Background
         screen.blit(sky,(0,0))
         screen.blit(ground,(0,300))
         score = display_score()
-
-        # Snail
-        # snail_hitbox.x -= 4
-        # if snail_hitbox.right <= 0: snail_hitbox.left = 800
-        # screen.blit(snail_surface,snail_hitbox)
 
         # Player
         player_gravity += 1
